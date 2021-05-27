@@ -1,27 +1,31 @@
-version: "3.9"
-
+version: "3"
 
 services:
+  database:
+    image: postgres
+    container_name: db
+    hostname: postgres
+    restart: unless-stopped
+    tty: true
+    environment:
+      - POSTGRES_DB=Base
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
 
   django:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: django1
+    working_dir: /code/
     command: python manage.py runserver 0.0.0.0:8000
+    tty: true
     volumes:
-      - .:/code
+      - .:/code/
     ports:
       - "8000:8000"
-    depends_on:
-    - database
-
-  database:
-    image: postgres
-    volumes:
-      - ./data/db:/var/lib/postgresql/data
     environment:
-      - POSTGRES_DB=SHOP_DB
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-
-
+      - CELERY_BROKER=redis://redis:6379/0
+      - CELERY_BACKEND=redis://redis:6379/0
+    depends_on:
+      - database
