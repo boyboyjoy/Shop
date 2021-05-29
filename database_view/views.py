@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
 from django.views.generic import ListView, DetailView
@@ -35,14 +36,21 @@ def clients_create(request):
     form = ClientForm(request.POST)
     if form.is_valid():
         form.save()
+        return redirect(reverse('client_list'))
+    for error in form.errors:
+        messages.add_message(request, messages.ERROR, form.errors.get(error))
     return redirect(reverse('client_list'))
 
 
 def clients_update(request, pk):
     client = get_object_or_404(ClientModel, pk=pk)
     form = ClientForm(request.POST, instance=client)
-    form.save()
-    return redirect(reverse('client_list'))
+    if form.is_valid():
+        form.save()
+        return redirect(reverse('client_list'))
+    for error in form.errors:
+        messages.add_message(request, messages.ERROR, form.errors.get(error))
+    return redirect(reverse('client_detail', kwargs={'pk': pk}))
 
 
 class DepartmentListView(ListView):
@@ -68,14 +76,21 @@ def department_create(request):
     form = DepartmentForm(request.POST)
     if form.is_valid():
         form.save()
-    return redirect(reverse('department_list'))
+        return redirect(reverse('department_list'))
+    for error in form.errors:
+        messages.add_message(request, messages.ERROR, form.errors.get(error))
+        return redirect(reverse('department_list'))
 
 
 def department_update(request, pk):
     department = get_object_or_404(DepartmentModel, pk=pk)
     form = DepartmentForm(request.POST, instance=department)
-    form.save()
-    return redirect(reverse('department_list'))
+    if form.is_valid():
+        form.save()
+        return redirect(reverse('department_list'))
+    for error in form.errors:
+        messages.add_message(request, messages.ERROR, form.errors.get(error))
+    return redirect(reverse('department_detail', kwargs={'pk': pk}))
 
 
 class DiscountCardListView(ListView):
