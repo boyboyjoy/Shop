@@ -8,3 +8,5 @@ class ProductModel(models.Model):
     vendor_code = models.CharField(max_length=13, blank=False, null=False)
     count = models.IntegerField(null=False)
 
+    def __str__(self):
+        return self.title

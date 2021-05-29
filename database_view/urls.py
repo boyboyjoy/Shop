@@ -8,7 +8,7 @@ from .views import ClientListView, DepartmentListView, DiscountCardListView, Cli
     WorkerDetailView, worker_update, WriteOffReasonListView, write_off_reason_create, write_off_reason_delete, \
     write_off_reason_update, WriteOffReasonDetailView, WriteOffProductListView, write_off_product_create, \
     write_off_product_delete, WriteOffProductDetailView, write_off_product_update, sale_delete, SaleDetailView, \
-    sale_update
+    sale_update, SupplyListView, supply_create, supply_delete, supply_update, SupplyDetailView
 
 urlpatterns = [
     path('', index, name='index'),
@@ -49,8 +49,6 @@ urlpatterns = [
     path('providers/<slug:pk>/', ProviderDetailView.as_view(), name='provider_detail'),
     path('providers/<slug:pk>/update/', provider_update, name='provider_update'),
 
-
-    # TODO TODO TODO TODO TODO
     path('sales/', SaleListView.as_view(), name='sale_list'),
     path('sales/create', sale_create, name='sale_create'),
     path('sales/<slug:pk>/delete/', sale_delete, name='sale_delete'),
@@ -68,10 +66,16 @@ urlpatterns = [
     path('write_off_reasons/<slug:pk>/delete/', write_off_reason_delete, name='write_off_reason_delete'),
     path('write_off_reasons/<slug:pk>/', WriteOffReasonDetailView.as_view(), name='write_off_reason_detail'),
     path('write_off_reasons/<slug:pk>/update/', write_off_reason_update, name='write_off_reason_update'),
-    # TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
+
     path('write_off_products/', WriteOffProductListView.as_view(), name='write_off_product_list'),
     path('write_off_products/create', write_off_product_create, name='write_off_product_create'),
     path('write_off_products/<slug:pk>/delete/', write_off_product_delete, name='write_off_product_delete'),
     path('write_off_products/<slug:pk>/', WriteOffProductDetailView.as_view(), name='write_off_product_detail'),
     path('write_off_products/<slug:pk>/update/', write_off_product_update, name='write_off_product_update'),
+
+    path('supplies/', SupplyListView.as_view(), name='supply_list'),
+    path('supplies/create', supply_create, name='supply_create'),
+    path('supplies/<slug:pk>/delete/', supply_delete, name='supply_delete'),
+    path('supplies/<slug:pk>/', SupplyDetailView.as_view(), name='supply_detail'),
+    path('supplies/<slug:pk>/update/', supply_update, name='supply_update'),
 ]

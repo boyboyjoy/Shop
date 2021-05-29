@@ -9,5 +9,5 @@ class ProviderForm(ModelForm):
         fields = ('name', 'phone', 'contract_expire')
 
         widgets = {
-        'contract_expire': DateTimeInput(attrs={'type': 'date'}),
+            'contract_expire': DateTimeInput(attrs={'type': 'date'}),
         }

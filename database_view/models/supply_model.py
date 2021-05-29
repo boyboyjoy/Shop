@@ -9,4 +9,4 @@ class SupplyModel(models.Model):
     product_id = models.ForeignKey(ProductModel, on_delete=models.CASCADE)
     provider_id = models.ForeignKey(ProviderModel, on_delete=models.CASCADE)
     count = models.IntegerField()
-    supply_date = models.DateTimeField(default=timezone.now)
+    supply_date = models.DateTimeField()

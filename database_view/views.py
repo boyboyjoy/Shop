@@ -3,9 +3,9 @@ from django.urls import reverse
 from django.views.generic import ListView, DetailView
 from database_view.forms.client_form import ClientForm
 from database_view.forms import DepartmentForm, DiscountCardForm, PositionForm, ProductForm, ProviderForm, SaleForm, \
-    WorkerForm, WriteOffReasonForm, WriteOffProductForm
+    WorkerForm, WriteOffReasonForm, WriteOffProductForm, SupplyForm
 from database_view.models import ClientModel, DepartmentModel, DiscountCardModel, PositionModel, ProductModel, \
-    ProviderModel, SaleModel, WorkerModel, WriteOffProductModel, WriteOffReasonModel
+    ProviderModel, SaleModel, WorkerModel, WriteOffProductModel, WriteOffReasonModel, SupplyModel
 
 
 def index(request):
@@ -332,3 +332,35 @@ def write_off_product_update(request, pk):
     form = WriteOffProductForm(request.POST, instance=product)
     form.save()
     return redirect(reverse('write_off_product_list'))
+
+
+class SupplyListView(ListView):
+    model = SupplyModel
+    template_name = 'supply/supply_list.html'
+    extra_context = {'create_form': SupplyForm()}
+    queryset = SupplyModel.objects.all().order_by('-supply_id')
+
+
+class SupplyDetailView(DetailView):
+    model = SupplyModel
+    template_name = 'supply/supply_detail.html'
+    extra_context = {'update_form': SupplyForm()}
+
+
+def supply_create(request):
+    form = SupplyForm(request.POST)
+    if form.is_valid():
+        form.save()
+    return redirect(reverse('supply_list'))
+
+
+def supply_delete(request, pk):
+    SupplyModel.objects.get(pk=pk).delete()
+    return redirect(reverse('supply_list'))
+
+
+def supply_update(request, pk):
+    supply = get_object_or_404(SupplyModel, pk=pk)
+    form = SupplyForm(request.POST, instance=supply)
+    form.save()
+    return redirect(reverse('supply_list'))
