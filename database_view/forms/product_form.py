@@ -21,6 +21,6 @@ class ProductForm(ModelForm):
 
     def clean_vendor_code(self):
         if str(self.cleaned_data.get('vendor_code')).isdigit() and \
-                str(self.cleaned_data.get('vendor_code')).__len__() == 11:
+                str(self.cleaned_data.get('vendor_code')).__len__() == 13:
             return self.cleaned_data.get('vendor_code')
         raise ValidationError('Штрих код должен быть длиной в 13 символов и состоять из цифр')
