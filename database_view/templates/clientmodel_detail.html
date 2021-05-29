@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 80%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  font-size: 14px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+<form action="{% url 'client_update' object.client_id %}" method="post">
+    {% csrf_token %}
+    {{ update_form.as_p }}
+    <input type="submit" value="Update">
+</form>
+<br><br>
+        <table>
+            <tr>
+                <th>Client_id</th>
+                <th>Surname</th>
+                <th>Name</th>
+                <th>Phone</th>
+            </tr>
+            <tr>
+                <td>{{ object.client_id }}</td>
+                <td>{{ object.surname }}</td>
+                <td>{{ object.name }}</td>
+                <td>{{ object.phone }}</td>
+            </tr>
+        </table>
+    </form>
+<br><br>
+    <a href="{% url 'client_list' %}">Back to list</a>
+    </body>
+</html>

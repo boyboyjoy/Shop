@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  font-size: 14px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+<form action="{% url 'client_create' %}" method="POST">
+    {% csrf_token %}
+    <p>{{ create_form.as_table }}</p>
+    <input type="submit" value="Create">
+</form>
+        <table>
+            <tr>
+                <th>Client_id</th>
+                <th>Surname</th>
+                <th>Name</th>
+                <th>Phone</th>
+            </tr>
+            {% for item in object_list %}
+            <tr>
+                <td><a href="{% url 'client_detail' item.client_id %}">{{ item.client_id }}</a> </td>
+                <td>{{ item.surname }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.phone }}</td>
+                <td><a href="{% url 'client_detail' item.client_id %}">Update</a></td>
+                <td><a href="{% url 'client_detail_delete' item.client_id %}">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>
