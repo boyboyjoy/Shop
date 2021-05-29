@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 80%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  font-size: 14px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+<form action="{% url 'provider_update' object.provider_id %}" method="post">
+    {% csrf_token %}
+    {{ update_form.as_p }}
+    <input type="submit" value="Update">
+</form>
+<br><br>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Contract expire</th>
+            </tr>
+            <tr>
+                <td>{{ object.name }}</td>
+                <td>{{ object.phone }}</td>
+                <td>{{ object.contract_expire }}</td>
+            </tr>
+        </table>
+    </form>
+<br><br>
+    <a href="{% url 'provider_list' %}">Back to list</a>
+    </body>
+</html>

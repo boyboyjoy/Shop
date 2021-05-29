@@ -2,7 +2,8 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
 from django.views.generic import ListView, DetailView
 from database_view.forms.client_form import ClientForm
-from database_view.forms import DepartmentForm, DiscountCardForm, PositionForm, ProductForm, ProviderForm
+from database_view.forms import DepartmentForm, DiscountCardForm, PositionForm, ProductForm, ProviderForm, SaleForm, \
+    WorkerForm
 from database_view.models import ClientModel, DepartmentModel, DiscountCardModel, PositionModel, ProductModel, \
     ProviderModel, SaleModel, WorkerModel, WriteOffProductModel, WriteOffReasonModel
 
@@ -203,3 +204,49 @@ def provider_update(request, pk):
     form = ProviderForm(request.POST, instance=provider)
     form.save()
     return redirect(reverse('provider_list'))
+
+
+class SaleListView(ListView):
+    model = SaleModel
+    template_name = 'sale/sale_list.html'
+    extra_context = {'create_form': SaleForm()}
+    queryset = SaleModel.objects.all().order_by('-sale_id')
+
+
+def sale_create(request):
+    form = SaleForm(request.POST)
+    if form.is_valid():
+        form.save()
+    return redirect(reverse('sale_list'))
+
+
+class WorkerListView(ListView):
+    model = WorkerModel
+    template_name = 'worker/worker_list.html'
+    extra_context = {'create_form': WorkerForm()}
+    queryset = WorkerModel.objects.all().order_by('-worker_id')
+
+
+def worker_create(request):
+    form = WorkerForm(request.POST)
+    if form.is_valid():
+        form.save()
+    return redirect(reverse('worker_list'))
+
+
+def worker_delete(request, pk):
+    WorkerModel.objects.get(pk=pk).delete()
+    return redirect(reverse('worker_list'))
+
+
+class WorkerDetailView(DetailView):
+    model = WorkerModel
+    template_name = 'worker/worker_detail.html'
+    extra_context = {'update_form': WorkerForm()}
+
+
+def worker_update(request, pk):
+    worker = get_object_or_404(WorkerModel, pk=pk)
+    form = WorkerForm(request.POST, instance=worker)
+    form.save()
+    return redirect(reverse('worker_list'))

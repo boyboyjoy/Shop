@@ -4,7 +4,8 @@ from .views import ClientListView, DepartmentListView, DiscountCardListView, Cli
     department_update, DiscountCardDetailView, discount_card_create, discount_card_update, discount_card_delete, \
     PositionListView, position_delete, PositionDetailView, position_update, ProductListView, product_create, \
     product_delete, ProductDetailView, product_update, ProviderListView, provider_create, provider_delete, \
-    ProviderDetailView, provider_update
+    ProviderDetailView, provider_update, SaleListView, sale_create, WorkerListView, worker_create, worker_delete, \
+    WorkerDetailView, worker_update
 
 urlpatterns = [
     path('', index, name='index'),
@@ -44,4 +45,16 @@ urlpatterns = [
     path('providers/<slug:pk>/delete/', provider_delete, name='provider_delete'),
     path('providers/<slug:pk>/', ProviderDetailView.as_view(), name='provider_detail'),
     path('providers/<slug:pk>/update/', provider_update, name='provider_update'),
+
+    path('sales/', SaleListView.as_view(), name='sale_list'),
+    path('sales/create', sale_create, name='sale_create'),
+    path('providers/<slug:pk>/delete/', provider_delete, name='provider_delete'),
+    path('providers/<slug:pk>/', ProviderDetailView.as_view(), name='provider_detail'),
+    path('providers/<slug:pk>/update/', provider_update, name='provider_update'),
+
+    path('workers/', WorkerListView.as_view(), name='worker_list'),
+    path('workers/create', worker_create, name='worker_create'),
+    path('workers/<slug:pk>/delete/', worker_delete, name='worker_delete'),
+    path('workers/<slug:pk>/', WorkerDetailView.as_view(), name='worker_detail'),
+    path('workers/<slug:pk>/update/', worker_update, name='worker_update'),
 ]

@@ -23,11 +23,11 @@ tr:nth-child(even) {
   background-color: #dddddd;
 }
 </style>
-    <h1 align="center">Department list</h1>
+    <h1 align="center">Worker list</h1>
     <a href="{% url 'index' %}"> <----Back </a>
 </head>
 <body>
-<form action="{% url 'department_create' %}" method="POST">
+<form action="{% url 'worker_create' %}" method="POST">
     {% csrf_token %}
     <p>{{ create_form.as_p }}</p>
     <input type="submit" value="Create">
@@ -35,13 +35,23 @@ tr:nth-child(even) {
 <br>
         <table>
             <tr>
+                <th>Position</th>
+                <th>Department</th>
+                <th>Surname</th>
                 <th>Name</th>
+                <th>Second name</th>
+                <th>Phone</th>
             </tr>
             {% for item in object_list %}
             <tr>
-                <td>{{ item.name }}</td>
-                <td><a href="{% url 'department_detail' item.department_id %}">Update</a></td>
-                <td><a href="{% url 'department_delete' item.department_id %}">Delete</a></td>
+                <td>{{ item.position_id }}</td>
+                <td>{{ item.department_id }}</td>
+                <td>{{ item.surname}}</td>
+                <td>{{ item.name}}</td>
+                <td>{{ item.second_name}}</td>
+                <td>{{ item.phone}}</td>
+                <td><a href="{% url 'worker_detail' item.worker_id %}">Update</a></td>
+                <td><a href="{% url 'worker_delete' item.worker_id %}">Delete</a></td>
             </tr>
             {% endfor %}
         </table>
