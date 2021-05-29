@@ -11,18 +11,15 @@ class ClientForm(ModelForm):
     def clean_name(self):
         if str(self.cleaned_data.get('name')).isalpha():
             return self.cleaned_data.get('name')
-        else:
-            raise ValidationError('Имя должно содержать только буквы')
+        raise ValidationError('Имя должно содержать только буквы')
 
     def clean_surname(self):
         if str(self.cleaned_data.get('surname')).isalpha():
             return self.cleaned_data.get('surname')
-        else:
-            raise ValidationError('Фамилия должна содержать только буквы')
+        raise ValidationError('Фамилия должна содержать только буквы')
 
     def clean_phone(self):
         if str(self.cleaned_data.get('phone')).isdigit() \
                 and str(self.cleaned_data.get('phone')).__len__() == 11:
             return self.cleaned_data.get('phone')
-        else:
-            raise ValidationError('Номер должен состоять только из цифр и быть длиной 11 цифр')
+        raise ValidationError('Номер должен состоять только из цифр и быть длиной 11 цифр')

@@ -8,7 +8,7 @@ from .views import ClientListView, DepartmentListView, DiscountCardListView, Cli
     WorkerDetailView, worker_update, WriteOffReasonListView, write_off_reason_create, write_off_reason_delete, \
     write_off_reason_update, WriteOffReasonDetailView, WriteOffProductListView, write_off_product_create, \
     write_off_product_delete, WriteOffProductDetailView, write_off_product_update, sale_delete, SaleDetailView, \
-    sale_update, SupplyListView, supply_create, supply_delete, supply_update, SupplyDetailView
+    sale_update, SupplyListView, supply_create, supply_delete, supply_update, SupplyDetailView, position_create
 
 urlpatterns = [
     path('', index, name='index'),
@@ -32,7 +32,7 @@ urlpatterns = [
     path('discount_cards/<slug:pk>/delete/', discount_card_delete, name='discount_card_delete'),
 
     path('positions/', PositionListView.as_view(), name='position_list'),
-    path('positions/create', discount_card_create, name='position_create'),
+    path('positions/create', position_create, name='position_create'),
     path('positions/<slug:pk>/delete/', position_delete, name='position_delete'),
     path('positions/<slug:pk>/', PositionDetailView.as_view(), name='position_detail'),
     path('positions/<slug:pk>/update/', position_update, name='position_update'),

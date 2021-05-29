@@ -12,5 +12,4 @@ class DepartmentForm(ModelForm):
     def clean_name(self):
         if str(self.cleaned_data.get('name')).isalpha():
             return self.cleaned_data.get('name')
-        else:
-            raise ValidationError('Название должно содержать только буквы')
+        raise ValidationError('Название должно содержать только буквы')

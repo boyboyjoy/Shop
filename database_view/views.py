@@ -110,14 +110,21 @@ def discount_card_create(request):
     form = DiscountCardForm(request.POST)
     if form.is_valid():
         form.save()
+        return redirect(reverse('discount_card_list'))
+    for error in form.errors:
+        messages.add_message(request, messages.ERROR, form.errors.get(error))
     return redirect(reverse('discount_card_list'))
 
 
 def discount_card_update(request, pk):
     card = get_object_or_404(DiscountCardModel, pk=pk)
     form = DiscountCardForm(request.POST, instance=card)
-    form.save()
-    return redirect(reverse('discount_card_list'))
+    if form.is_valid():
+        form.save()
+        return redirect(reverse('discount_card_list'))
+    for error in form.errors:
+        messages.add_message(request, messages.ERROR, form.errors.get(error))
+    return redirect(reverse('discount_card_detail', kwargs={'pk': pk}))
 
 
 def discount_card_delete(request, pk):
@@ -132,10 +139,13 @@ class PositionListView(ListView):
     queryset = PositionModel.objects.all().order_by('-position_id')
 
 
-def discount_card_create(request):
+def position_create(request):
     form = PositionForm(request.POST)
     if form.is_valid():
         form.save()
+        return redirect(reverse('position_list'))
+    for error in form.errors:
+        messages.add_message(request, messages.ERROR, form.errors.get(error))
     return redirect(reverse('position_list'))
 
 
@@ -153,8 +163,12 @@ class PositionDetailView(DetailView):
 def position_update(request, pk):
     position = get_object_or_404(PositionModel, pk=pk)
     form = PositionForm(request.POST, instance=position)
-    form.save()
-    return redirect(reverse('position_list'))
+    if form.is_valid():
+        form.save()
+        return redirect(reverse('position_list'))
+    for error in form.errors:
+        messages.add_message(request, messages.ERROR, form.errors.get(error))
+    return redirect(reverse('position_detail', kwargs={'pk': pk}))
 
 
 class ProductListView(ListView):
@@ -168,6 +182,9 @@ def product_create(request):
     form = ProductForm(request.POST)
     if form.is_valid():
         form.save()
+        return redirect(reverse('product_list'))
+    for error in form.errors:
+        messages.add_message(request, messages.ERROR, form.errors.get(error))
     return redirect(reverse('product_list'))
 
 
@@ -185,8 +202,12 @@ class ProductDetailView(DetailView):
 def product_update(request, pk):
     product = get_object_or_404(ProductModel, pk=pk)
     form = ProductForm(request.POST, instance=product)
-    form.save()
-    return redirect(reverse('product_list'))
+    if form.is_valid():
+        form.save()
+        return redirect(reverse('product_list'))
+    for error in form.errors:
+        messages.add_message(request, messages.ERROR, form.errors.get(error))
+    return redirect(reverse('product_detail', kwargs={'pk': pk}))
 
 
 class ProviderListView(ListView):
@@ -200,6 +221,9 @@ def provider_create(request):
     form = ProviderForm(request.POST)
     if form.is_valid():
         form.save()
+        return redirect(reverse('provider_list'))
+    for error in form.errors:
+        messages.add_message(request, messages.ERROR, form.errors.get(error))
     return redirect(reverse('provider_list'))
 
 
@@ -217,8 +241,12 @@ class ProviderDetailView(DetailView):
 def provider_update(request, pk):
     provider = get_object_or_404(ProviderModel, pk=pk)
     form = ProviderForm(request.POST, instance=provider)
-    form.save()
-    return redirect(reverse('provider_list'))
+    if form.is_valid():
+        form.save()
+        return redirect(reverse('provider_list'))
+    for error in form.errors:
+        messages.add_message(request, messages.ERROR, form.errors.get(error))
+    return redirect(reverse('provider_detail', kwargs={'pk': pk}))
 
 
 class SaleListView(ListView):
@@ -232,6 +260,9 @@ def sale_create(request):
     form = SaleForm(request.POST)
     if form.is_valid():
         form.save()
+        return redirect(reverse('sale_list'))
+    for error in form.errors:
+        messages.add_message(request, messages.ERROR, form.errors.get(error))
     return redirect(reverse('sale_list'))
 
 
@@ -249,8 +280,12 @@ class SaleDetailView(DetailView):
 def sale_update(request, pk):
     sale = get_object_or_404(SaleModel, pk=pk)
     form = SaleForm(request.POST, instance=sale)
-    form.save()
-    return redirect(reverse('sale_list'))
+    if form.is_valid():
+        form.save()
+        return redirect(reverse('sale_list'))
+    for error in form.errors:
+        messages.add_message(request, messages.ERROR, form.errors.get(error))
+    return redirect(reverse('sale_detail', kwargs={'pk': pk}))
 
 
 class WorkerListView(ListView):
@@ -264,6 +299,9 @@ def worker_create(request):
     form = WorkerForm(request.POST)
     if form.is_valid():
         form.save()
+        return redirect(reverse('worker_list'))
+    for error in form.errors:
+        messages.add_message(request, messages.ERROR, form.errors.get(error))
     return redirect(reverse('worker_list'))
 
 
@@ -281,8 +319,12 @@ class WorkerDetailView(DetailView):
 def worker_update(request, pk):
     worker = get_object_or_404(WorkerModel, pk=pk)
     form = WorkerForm(request.POST, instance=worker)
-    form.save()
-    return redirect(reverse('worker_list'))
+    if form.is_valid():
+        form.save()
+        return redirect(reverse('worker_list'))
+    for error in form.errors:
+        messages.add_message(request, messages.ERROR, form.errors.get(error))
+    return redirect(reverse('worker_detail', kwargs={'pk': pk}))
 
 
 class WriteOffReasonListView(ListView):
@@ -328,6 +370,9 @@ def write_off_product_create(request):
     form = WriteOffProductForm(request.POST)
     if form.is_valid():
         form.save()
+        return redirect(reverse('write_off_product_list'))
+    for error in form.errors:
+        messages.add_message(request, messages.ERROR, form.errors.get(error))
     return redirect(reverse('write_off_product_list'))
 
 
@@ -345,8 +390,12 @@ class WriteOffProductDetailView(DetailView):
 def write_off_product_update(request, pk):
     product = get_object_or_404(WriteOffProductModel, pk=pk)
     form = WriteOffProductForm(request.POST, instance=product)
-    form.save()
-    return redirect(reverse('write_off_product_list'))
+    if form.is_valid():
+        form.save()
+        return redirect(reverse('write_off_product_list'))
+    for error in form.errors:
+        messages.add_message(request, messages.ERROR, form.errors.get(error))
+    return redirect(reverse('write_off_product_detail', kwargs={'pk': pk}))
 
 
 class SupplyListView(ListView):
@@ -366,6 +415,9 @@ def supply_create(request):
     form = SupplyForm(request.POST)
     if form.is_valid():
         form.save()
+        return redirect(reverse('supply_list'))
+    for error in form.errors:
+        messages.add_message(request, messages.ERROR, form.errors.get(error))
     return redirect(reverse('supply_list'))
 
 
@@ -377,5 +429,9 @@ def supply_delete(request, pk):
 def supply_update(request, pk):
     supply = get_object_or_404(SupplyModel, pk=pk)
     form = SupplyForm(request.POST, instance=supply)
-    form.save()
-    return redirect(reverse('supply_list'))
+    if form.is_valid():
+        form.save()
+        return redirect(reverse('supply_list'))
+    for error in form.errors:
+        messages.add_message(request, messages.ERROR, form.errors.get(error))
+    return redirect(reverse('supply_detail', kwargs={'pk': pk}))

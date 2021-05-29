@@ -28,6 +28,11 @@ tr:nth-child(even) {
     <input type="submit" value="Обновить">
 </form>
 </table>
+{% if messages %}
+{% for message in messages %}
+<p>{{ message }}</p>
+{% endfor %}
+{% endif %}
 <br><br>
         <table>
             <tr>
