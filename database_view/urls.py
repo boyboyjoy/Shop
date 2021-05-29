@@ -8,10 +8,14 @@ from .views import ClientListView, DepartmentListView, DiscountCardListView, Cli
     WorkerDetailView, worker_update, WriteOffReasonListView, write_off_reason_create, write_off_reason_delete, \
     write_off_reason_update, WriteOffReasonDetailView, WriteOffProductListView, write_off_product_create, \
     write_off_product_delete, WriteOffProductDetailView, write_off_product_update, sale_delete, SaleDetailView, \
-    sale_update, SupplyListView, supply_create, supply_delete, supply_update, SupplyDetailView, position_create
+    sale_update, SupplyListView, supply_create, supply_delete, supply_update, SupplyDetailView, position_create, \
+    get_workers_list, get_worker_report
 
 urlpatterns = [
     path('', index, name='index'),
+
+    path('worker_reports/', get_workers_list, name='reports'),
+    path('worker_reports/<slug:pk>', get_worker_report, name='get_report'),
 
     path('clients/', ClientListView.as_view(), name='client_list'),
     path('clients/<slug:pk>/', ClientDetailView.as_view(), name='client_detail'),

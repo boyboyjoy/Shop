@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.http import FileResponse
 from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
 from django.views.generic import ListView, DetailView
@@ -435,3 +436,20 @@ def supply_update(request, pk):
     for error in form.errors:
         messages.add_message(request, messages.ERROR, form.errors.get(error))
     return redirect(reverse('supply_detail', kwargs={'pk': pk}))
+
+
+def get_workers_list(request):
+    return render(request, 'worker_report/worker_report_list.html',
+                  context={'worker_list': WorkerModel.objects.all()})
+
+
+def get_worker_report(request, pk):
+    worker = WorkerModel.objects.get(pk=pk)
+    money_value = 0
+    sales = SaleModel.objects.filter(worker_id=worker.worker_id)
+    write_off_products = WriteOffProductModel.objects.filter(worker_id=worker.worker_id)
+    for sale in sales:
+        money_value += sale.sale_cost
+    data = {'create_money': money_value, 'create_sales': sales.count(),
+            'create_write_off': write_off_products.count(), 'worker': worker}
+    return render(request, 'worker_report/worker_report.html', context=data)
