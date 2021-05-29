@@ -23,31 +23,32 @@ tr:nth-child(even) {
   background-color: #dddddd;
 }
 </style>
-    <h1 align="center">Clients list</h1>
-    <a href="{% url 'index' %}"> <----Back </a>
+    <h1 align="center">Клиенты</h1>
+    <a href="{% url 'index' %}"> <----Назад </a>
 </head>
 <body>
+<br><br>
 <table>
     <form action="{% url 'client_create' %}" method="POST">
     {% csrf_token %}
     <p>{{ create_form.as_table }}</p>
-    <input type="submit" value="Create">
+    <input type="submit" value="Создать">
 </form>
 </table>
 <br>
         <table>
             <tr>
-                <th>Surname</th>
-                <th>Name</th>
-                <th>Phone</th>
+                <th>Фамилия</th>
+                <th>Имя</th>
+                <th>Телефон</th>
             </tr>
             {% for item in object_list %}
             <tr>
                 <td>{{ item.surname }}</td>
                 <td>{{ item.name }}</td>
                 <td>{{ item.phone }}</td>
-                <td><a href="{% url 'client_detail' item.client_id %}">Update</a></td>
-                <td><a href="{% url 'client_detail_delete' item.client_id %}">Delete</a></td>
+                <td><a href="{% url 'client_detail' item.client_id %}">Обновить</a></td>
+                <td><a href="{% url 'client_detail_delete' item.client_id %}">Удалить</a></td>
             </tr>
             {% endfor %}
         </table>

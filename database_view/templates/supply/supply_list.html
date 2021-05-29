@@ -23,22 +23,22 @@ tr:nth-child(even) {
   background-color: #dddddd;
 }
 </style>
-    <h1 align="center">Supply list</h1>
-    <a href="{% url 'index' %}"> <----Back </a>
+    <h1 align="center">Поставки</h1>
+    <a href="{% url 'index' %}"> <----Назад </a>
 </head>
 <body>
 <form action="{% url 'supply_create' %}" method="POST">
     {% csrf_token %}
     <p>{{ create_form.as_p }}</p>
-    <input type="submit" value="Create">
+    <input type="submit" value="Создать">
 </form>
 <br>
         <table>
             <tr>
-                <th>Product</th>
-                <th>Provider</th>
-                <th>Count</th>
-                <th>Date</th>
+                <th>Продукт</th>
+                <th>Поставщик</th>
+                <th>Число</th>
+                <th>Дата поставки</th>
             </tr>
             {% for item in object_list %}
             <tr>
@@ -46,8 +46,8 @@ tr:nth-child(even) {
                 <td>{{ item.provider_id }}</td>
                 <td>{{ item.count}}</td>
                 <td>{{ item.supply_date.date }}</td>
-                <td><a href="{% url 'supply_detail' item.supply_id %}">Update</a></td>
-                <td><a href="{% url 'supply_delete' item.supply_id %}">Delete</a></td>
+                <td><a href="{% url 'supply_detail' item.supply_id %}">Обновить</a></td>
+                <td><a href="{% url 'supply_delete' item.supply_id %}">Удалить</a></td>
             </tr>
             {% endfor %}
         </table>

@@ -23,27 +23,27 @@ tr:nth-child(even) {
   background-color: #dddddd;
 }
 </style>
-    <h1 align="center">DiscountCard list</h1>
-    <a href="{% url 'index' %}"> <----Back </a>
+    <h1 align="center">Скидочные карты</h1>
+    <a href="{% url 'index' %}"> <----Назад </a>
 </head>
 <body>
 <form action="{% url 'discount_card_create' %}" method="POST">
     {% csrf_token %}
     <p>{{ create_form.as_p }}</p>
-    <input type="submit" value="Create">
+    <input type="submit" value="Создать">
 </form>
 <br>
         <table>
             <tr>
-                <th>Client</th>
-                <th>DiscountValue</th>
+                <th>Клиент</th>
+                <th>Размер скидки</th>
             </tr>
             {% for item in object_list %}
             <tr>
                 <td>{{ item.client_id }}</td>
                 <td>{{ item.discount_value }}</td>
-                <td><a href="{% url 'discount_card_detail' item.card_id %}">Update</a></td>
-                <td><a href="{% url 'discount_card_delete' item.card_id %}">Delete</a></td>
+                <td><a href="{% url 'discount_card_detail' item.card_id %}">Обновить</a></td>
+                <td><a href="{% url 'discount_card_delete' item.card_id %}">Удалить</a></td>
             </tr>
             {% endfor %}
         </table>

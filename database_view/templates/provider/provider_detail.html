@@ -24,23 +24,23 @@ tr:nth-child(even) {
 <form action="{% url 'provider_update' object.provider_id %}" method="post">
     {% csrf_token %}
     {{ update_form.as_p }}
-    <input type="submit" value="Update">
+    <input type="submit" value="Обновить">
 </form>
 <br><br>
         <table>
             <tr>
-                <th>Name</th>
-                <th>Phone</th>
-                <th>Contract expire</th>
+                <th>Фирма</th>
+                <th>Контактный телефон</th>
+                <th>Контракт истекает</th>
             </tr>
             <tr>
                 <td>{{ object.name }}</td>
                 <td>{{ object.phone }}</td>
-                <td>{{ object.contract_expire }}</td>
+                <td>{{ object.contract_expire.date }}</td>
             </tr>
         </table>
     </form>
 <br><br>
-    <a href="{% url 'provider_list' %}">Back to list</a>
+    <a href="{% url 'provider_list' %}">назад</a>
     </body>
 </html>

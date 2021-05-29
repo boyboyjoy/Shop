@@ -23,25 +23,25 @@ tr:nth-child(even) {
   background-color: #dddddd;
 }
 </style>
-    <h1 align="center">Department list</h1>
-    <a href="{% url 'index' %}"> <----Back </a>
+    <h1 align="center">Отделы</h1>
+    <a href="{% url 'index' %}"> <----Назад </a>
 </head>
 <body>
 <form action="{% url 'department_create' %}" method="POST">
     {% csrf_token %}
     <p>{{ create_form.as_p }}</p>
-    <input type="submit" value="Create">
+    <input type="submit" value="Создать">
 </form>
 <br>
         <table>
             <tr>
-                <th>Name</th>
+                <th>Название</th>
             </tr>
             {% for item in object_list %}
             <tr>
                 <td>{{ item.name }}</td>
-                <td><a href="{% url 'department_detail' item.department_id %}">Update</a></td>
-                <td><a href="{% url 'department_delete' item.department_id %}">Delete</a></td>
+                <td><a href="{% url 'department_detail' item.department_id %}">Обновить</a></td>
+                <td><a href="{% url 'department_delete' item.department_id %}">Удалить</a></td>
             </tr>
             {% endfor %}
         </table>
