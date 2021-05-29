@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+a {
+  color: #000 !important;
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  height: 70%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  font-size: 14px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+    <h1 align="center">Department list</h1>
+    <a href="{% url 'index' %}"> <----Back </a>
+</head>
+<body>
+<form action="{% url 'department_create' %}" method="POST">
+    {% csrf_token %}
+    <p>{{ create_form.as_p }}</p>
+    <input type="submit" value="Create">
+</form>
+<br>
+        <table>
+            <tr>
+                <th>Surname</th>
+            </tr>
+            {% for item in object_list %}
+            <tr>
+                <td>{{ item.name }}</td>
+                <td><a href="{% url 'department_detail' item.department_id %}">Update</a></td>
+                <td><a href="{% url 'department_delete' item.department_id %}">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>
