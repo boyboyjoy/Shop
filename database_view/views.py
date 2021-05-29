@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.views.generic import ListView, DetailView
 from database_view.forms.client_form import ClientForm
 from database_view.forms import DepartmentForm, DiscountCardForm, PositionForm, ProductForm, ProviderForm, SaleForm, \
-    WorkerForm
+    WorkerForm, WriteOffReasonForm
 from database_view.models import ClientModel, DepartmentModel, DiscountCardModel, PositionModel, ProductModel, \
     ProviderModel, SaleModel, WorkerModel, WriteOffProductModel, WriteOffReasonModel
 
@@ -250,3 +250,35 @@ def worker_update(request, pk):
     form = WorkerForm(request.POST, instance=worker)
     form.save()
     return redirect(reverse('worker_list'))
+
+
+class WriteOffReasonListView(ListView):
+    model = WriteOffReasonModel
+    template_name = 'write_off_reason/write_off_reason_list.html'
+    extra_context = {'create_form': WriteOffReasonForm()}
+    queryset = WriteOffReasonModel.objects.all().order_by('-reason_id')
+
+
+def write_off_reason_create(request):
+    form = WriteOffReasonForm(request.POST)
+    if form.is_valid():
+        form.save()
+    return redirect(reverse('write_off_reason_list'))
+
+
+def write_off_reason_delete(request, pk):
+    WriteOffReasonModel.objects.get(pk=pk).delete()
+    return redirect(reverse('write_off_reason_list'))
+
+
+class WriteOffReasonDetailView(DetailView):
+    model = WriteOffReasonModel
+    template_name = 'write_off_reason/write_off_reason_detail.html'
+    extra_context = {'update_form': WriteOffReasonForm()}
+
+
+def write_off_reason_update(request, pk):
+    reason = get_object_or_404(WriteOffReasonModel, pk=pk)
+    form = WriteOffReasonForm(request.POST, instance=reason)
+    form.save()
+    return redirect(reverse('write_off_reason_list'))

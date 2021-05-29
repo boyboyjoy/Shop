@@ -5,7 +5,8 @@ from .views import ClientListView, DepartmentListView, DiscountCardListView, Cli
     PositionListView, position_delete, PositionDetailView, position_update, ProductListView, product_create, \
     product_delete, ProductDetailView, product_update, ProviderListView, provider_create, provider_delete, \
     ProviderDetailView, provider_update, SaleListView, sale_create, WorkerListView, worker_create, worker_delete, \
-    WorkerDetailView, worker_update
+    WorkerDetailView, worker_update, WriteOffReasonListView, write_off_reason_create, write_off_reason_delete, \
+    write_off_reason_update, WriteOffReasonDetailView
 
 urlpatterns = [
     path('', index, name='index'),
@@ -46,6 +47,8 @@ urlpatterns = [
     path('providers/<slug:pk>/', ProviderDetailView.as_view(), name='provider_detail'),
     path('providers/<slug:pk>/update/', provider_update, name='provider_update'),
 
+
+    # TODO TODO TODO TODO TODO
     path('sales/', SaleListView.as_view(), name='sale_list'),
     path('sales/create', sale_create, name='sale_create'),
     path('providers/<slug:pk>/delete/', provider_delete, name='provider_delete'),
@@ -57,4 +60,10 @@ urlpatterns = [
     path('workers/<slug:pk>/delete/', worker_delete, name='worker_delete'),
     path('workers/<slug:pk>/', WorkerDetailView.as_view(), name='worker_detail'),
     path('workers/<slug:pk>/update/', worker_update, name='worker_update'),
+
+    path('write_off_reasons/', WriteOffReasonListView.as_view(), name='write_off_reason_list'),
+    path('write_off_reasons/create', write_off_reason_create, name='write_off_reason_create'),
+    path('write_off_reasons/<slug:pk>/delete/', write_off_reason_delete, name='write_off_reason_delete'),
+    path('write_off_reasons/<slug:pk>/', WriteOffReasonDetailView.as_view(), name='write_off_reason_detail'),
+    path('write_off_reasons/<slug:pk>/update/', write_off_reason_update, name='write_off_reason_update'),
 ]
