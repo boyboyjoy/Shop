@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
 from django.views.generic import ListView, DetailView
 from database_view.forms.client_form import ClientForm
-from database_view.forms import DepartmentForm
+from database_view.forms import DepartmentForm, DiscountCardForm
 from database_view.models import ClientModel, DepartmentModel, DiscountCardModel, PositionModel, ProductModel, \
     ProviderModel, SaleModel, WorkerModel, WriteOffProductModel, WriteOffReasonModel
 
@@ -77,42 +77,33 @@ def department_update(request, pk):
     return redirect(reverse('department_list'))
 
 
-
-
-
-
-
 class DiscountCardListView(ListView):
     model = DiscountCardModel
+    template_name = 'discount_card/discountcardmodel_list.html'
+    extra_context = {'create_form': DiscountCardForm()}
+    queryset = DiscountCardModel.objects.all().order_by('-card_id')
 
 
-class PositionListView(ListView):
-    model = PositionModel
+class DiscountCardDetailView(DetailView):
+    model = DiscountCardModel
+    template_name = 'discount_card/discountcardmodel_detail.html'
+    extra_context = {'update_form': DiscountCardForm()}
 
 
-class ProductListView(ListView):
-    model = ProductModel
+def discount_card_create(request):
+    form = DiscountCardForm(request.POST)
+    if form.is_valid():
+        form.save()
+    return redirect(reverse('discount_card_list'))
 
 
-class ProviderListView(ListView):
-    model = ProviderModel
+def discount_card_update(request, pk):
+    card = get_object_or_404(DiscountCardModel, pk=pk)
+    form = DiscountCardForm(request.POST, instance=card)
+    form.save()
+    return redirect(reverse('discount_card_list'))
 
 
-class SaleListView(ListView):
-    model = SaleModel
-
-
-class SupplyListView(ListView):
-    model = SaleModel
-
-
-class WorkerListView(ListView):
-    model = WorkerModel
-
-
-class WriteOffProductListView(ListView):
-    model = WriteOffProductModel
-
-
-class WriteOffReasonListView(ListView):
-    model = WriteOffReasonModel
+def discount_card_delete(request, pk):
+    DiscountCardModel.objects.get(pk=pk).delete()
+    return redirect(reverse('discount_card_list'))
