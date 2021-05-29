@@ -7,7 +7,8 @@ class ProviderForm(ModelForm):
     class Meta:
         model = ProviderModel
         fields = ('name', 'phone', 'contract_expire')
-
+        labels = {'name': 'фирма', 'phone': 'контактный телефон',
+                  'contract_expire': 'дата истечения контракта'}
         widgets = {
             'contract_expire': DateTimeInput(attrs={'type': 'date'}),
         }

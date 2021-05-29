@@ -6,3 +6,4 @@ class DiscountCardForm(ModelForm):
     class Meta:
         model = DiscountCardModel
         fields = ('client_id', 'discount_value')
+        labels = {'client_id': 'клиент', 'discount_value': 'размер скидки'}

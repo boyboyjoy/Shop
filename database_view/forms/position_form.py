@@ -6,3 +6,4 @@ class PositionForm(ModelForm):
     class Meta:
         model = PositionModel
         fields = ('name', 'salary')
+        labels = {'name': 'должность', 'salary': 'зарплата'}

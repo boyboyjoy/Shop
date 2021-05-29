@@ -5,4 +5,5 @@ from database_view.models.department_model import DepartmentModel
 class DepartmentForm(ModelForm):
     class Meta:
         model = DepartmentModel
-        fields = ('name', )
+        fields = ('name',)
+        labels = {'name': 'название', }

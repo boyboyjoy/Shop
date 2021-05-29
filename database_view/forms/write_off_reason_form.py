@@ -6,3 +6,4 @@ class WriteOffReasonForm(ModelForm):
     class Meta:
         model = WriteOffReasonModel
         fields = ('write_off_reason', )
+        labels = {'write_off_reason': 'причина списания', }
