@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
 from django.views.generic import ListView, DetailView
 from database_view.forms.client_form import ClientForm
-from database_view.forms import DepartmentForm, DiscountCardForm, PositionForm
+from database_view.forms import DepartmentForm, DiscountCardForm, PositionForm, ProductForm
 from database_view.models import ClientModel, DepartmentModel, DiscountCardModel, PositionModel, ProductModel, \
     ProviderModel, SaleModel, WorkerModel, WriteOffProductModel, WriteOffReasonModel
 
@@ -139,3 +139,35 @@ def position_update(request, pk):
     form = PositionForm(request.POST, instance=position)
     form.save()
     return redirect(reverse('position_list'))
+
+
+class ProductListView(ListView):
+    model = ProductModel
+    template_name = 'product/product_list.html'
+    extra_context = {'create_form': ProductForm()}
+    queryset = ProductModel.objects.all().order_by('-product_id')
+
+
+def product_create(request):
+    form = ProductForm(request.POST)
+    if form.is_valid():
+        form.save()
+    return redirect(reverse('product_list'))
+
+
+def product_delete(request, pk):
+    ProductModel.objects.get(pk=pk).delete()
+    return redirect(reverse('product_list'))
+
+
+class ProductDetailView(DetailView):
+    model = ProductModel
+    template_name = 'product/product_detail.html'
+    extra_context = {'update_form': ProductForm()}
+
+
+def product_update(request, pk):
+    product = get_object_or_404(ProductModel, pk=pk)
+    form = ProductForm(request.POST, instance=product)
+    form.save()
+    return redirect(reverse('product_list'))

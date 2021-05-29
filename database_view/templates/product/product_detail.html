@@ -21,7 +21,7 @@ tr:nth-child(even) {
 </style>
 </head>
 <body>
-<form action="{% url 'position_update' object.position_id %}" method="post">
+<form action="{% url 'product_update' object.product_id %}" method="post">
     {% csrf_token %}
     {{ update_form.as_p }}
     <input type="submit" value="Update">
@@ -29,15 +29,20 @@ tr:nth-child(even) {
 <br><br>
         <table>
             <tr>
-                <th>Name</th>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Vendor code</th>
+                <th>Count</th>
             </tr>
             <tr>
-                <td>{{ object.name }}</td>
-                <td>{{ object.salary }}</td>
+                <td>{{ object.title }}</td>
+                <td>{{ object.price }}</td>
+                <td>{{ object.vendor_code }}</td>
+                <td>{{ object.count }}</td>
             </tr>
         </table>
     </form>
 <br><br>
-    <a href="{% url 'position_list' %}">Back to list</a>
+    <a href="{% url 'product_list' %}">Back to list</a>
     </body>
 </html>
