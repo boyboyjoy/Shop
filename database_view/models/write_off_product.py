@@ -11,4 +11,4 @@ class WriteOffProductModel(models.Model):
     product_id = models.ForeignKey(ProductModel, on_delete=models.CASCADE)
     reason_id = models.ForeignKey(WriteOffReasonModel, on_delete=models.CASCADE)
     count = models.IntegerField()
-    date = models.DateTimeField(auto_now=timezone.now)
+    date = models.DateTimeField(default=timezone.now)

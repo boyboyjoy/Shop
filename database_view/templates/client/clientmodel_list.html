@@ -2,10 +2,14 @@
 <html>
 <head>
 <style>
+a {
+  color: #000 !important;
+}
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
   width: 100%;
+  height: 70%;
 }
 
 td, th {
@@ -19,23 +23,24 @@ tr:nth-child(even) {
   background-color: #dddddd;
 }
 </style>
+    <h1 align="center">Clients list</h1>
+    <a href="{% url 'index' %}"> <----Back </a>
 </head>
 <body>
 <form action="{% url 'client_create' %}" method="POST">
     {% csrf_token %}
-    <p>{{ create_form.as_table }}</p>
+    <p>{{ create_form.as_p }}</p>
     <input type="submit" value="Create">
 </form>
+<br>
         <table>
             <tr>
-                <th>Client_id</th>
                 <th>Surname</th>
                 <th>Name</th>
                 <th>Phone</th>
             </tr>
             {% for item in object_list %}
             <tr>
-                <td><a href="{% url 'client_detail' item.client_id %}">{{ item.client_id }}</a> </td>
                 <td>{{ item.surname }}</td>
                 <td>{{ item.name }}</td>
                 <td>{{ item.phone }}</td>

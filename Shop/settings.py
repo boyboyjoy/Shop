@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'database_view.apps.DatabaseViewConfig',
-    'django_tables2',
 ]
 
 MIDDLEWARE = [
@@ -130,4 +129,4 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-STATIC_URL = '/templates/'
+STATIC_URL = '/static/'
