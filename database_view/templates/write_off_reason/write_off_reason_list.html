@@ -23,25 +23,27 @@ tr:nth-child(even) {
   background-color: #dddddd;
 }
 </style>
-    <h1 align="center">Product list</h1>
-    <a href="{% url 'index' %}"> <----Back </a>
+    <h1 align="center">Причина списания</h1>
+    <a href="{% url 'index' %}"> <----Назад </a>
 </head>
 <body>
-<form action="{% url 'write_off_reason_create' %}" method="POST">
+<table>
+    <form action="{% url 'write_off_reason_create' %}" method="POST">
     {% csrf_token %}
-    <p>{{ create_form.as_p }}</p>
-    <input type="submit" value="Create">
+    <p>{{ create_form.as_table }}</p>
+    <input type="submit" value="Создать">
 </form>
+</table>
 <br>
         <table>
             <tr>
-                <th>Reason</th>
+                <th>Причина списания</th>
             </tr>
             {% for item in object_list %}
             <tr>
                 <td>{{ item.write_off_reason }}</td>
-                <td><a href="{% url 'write_off_reason_detail' item.reason_id %}">Update</a></td>
-                <td><a href="{% url 'write_off_reason_delete' item.reason_id %}">Delete</a></td>
+                <td><a href="{% url 'write_off_reason_detail' item.reason_id %}">Обновить</a></td>
+                <td><a href="{% url 'write_off_reason_delete' item.reason_id %}">Удалить</a></td>
             </tr>
             {% endfor %}
         </table>

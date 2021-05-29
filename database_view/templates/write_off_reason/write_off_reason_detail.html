@@ -5,7 +5,7 @@
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
-  width: 80%;
+  width: 100%;
 }
 
 td, th {
@@ -21,15 +21,17 @@ tr:nth-child(even) {
 </style>
 </head>
 <body>
-<form action="{% url 'write_off_reason_update' object.reason_id %}" method="post">
+<table>
+    <form action="{% url 'write_off_reason_update' object.reason_id %}" method="post">
     {% csrf_token %}
-    {{ update_form.as_p }}
-    <input type="submit" value="Update">
+    {{ update_form.as_table }}
+    <input type="submit" value="Обновить">
 </form>
+</table>
 <br><br>
         <table>
             <tr>
-                <th>Reason</th>
+                <th>Причина списания</th>
             </tr>
             <tr>
                 <td>{{ object.write_off_reason }}</td>
@@ -37,6 +39,6 @@ tr:nth-child(even) {
         </table>
     </form>
 <br><br>
-    <a href="{% url 'write_off_reason_list' %}">Back to list</a>
+    <a href="{% url 'write_off_reason_list' %}">назад</a>
     </body>
 </html>

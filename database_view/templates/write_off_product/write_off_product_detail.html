@@ -5,7 +5,7 @@
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
-  width: 80%;
+  width: 100%;
 }
 
 td, th {
@@ -21,11 +21,13 @@ tr:nth-child(even) {
 </style>
 </head>
 <body>
-<form action="{% url 'write_off_product_update' object.write_off_product_id %}" method="post">
+<table>
+    <form action="{% url 'write_off_product_update' object.write_off_product_id %}" method="post">
     {% csrf_token %}
-    {{ update_form.as_p }}
+    {{ update_form.as_table }}
     <input type="submit" value="Обновить">
 </form>
+</table>
 <br><br>
         <table>
             <tr>

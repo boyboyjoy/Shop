@@ -27,11 +27,13 @@ tr:nth-child(even) {
     <a href="{% url 'index' %}"> <----Назад </a>
 </head>
 <body>
-<form action="{% url 'sale_create' %}" method="POST">
+<table>
+    <form action="{% url 'sale_create' %}" method="POST">
     {% csrf_token %}
-    <p>{{ create_form.as_p }}</p>
+    <p>{{ create_form.as_table }}</p>
     <input type="submit" value="Создать">
 </form>
+</table>
 <br>
         <table>
             <tr>
