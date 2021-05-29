@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
 from django.views.generic import ListView, DetailView
 from database_view.forms.client_form import ClientForm
-from database_view.forms import DepartmentForm, DiscountCardForm
+from database_view.forms import DepartmentForm, DiscountCardForm, PositionForm
 from database_view.models import ClientModel, DepartmentModel, DiscountCardModel, PositionModel, ProductModel, \
     ProviderModel, SaleModel, WorkerModel, WriteOffProductModel, WriteOffReasonModel
 
@@ -107,3 +107,35 @@ def discount_card_update(request, pk):
 def discount_card_delete(request, pk):
     DiscountCardModel.objects.get(pk=pk).delete()
     return redirect(reverse('discount_card_list'))
+
+
+class PositionListView(ListView):
+    model = PositionModel
+    template_name = 'position/position_list.html'
+    extra_context = {'create_form': PositionForm()}
+    queryset = PositionModel.objects.all().order_by('-position_id')
+
+
+def discount_card_create(request):
+    form = PositionForm(request.POST)
+    if form.is_valid():
+        form.save()
+    return redirect(reverse('position_list'))
+
+
+def position_delete(request, pk):
+    PositionModel.objects.get(pk=pk).delete()
+    return redirect(reverse('position_list'))
+
+
+class PositionDetailView(DetailView):
+    model = PositionModel
+    template_name = 'position/position_detail.html'
+    extra_context = {'update_form': PositionForm()}
+
+
+def position_update(request, pk):
+    position = get_object_or_404(PositionModel, pk=pk)
+    form = PositionForm(request.POST, instance=position)
+    form.save()
+    return redirect(reverse('position_list'))
