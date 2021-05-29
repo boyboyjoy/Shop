@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
 from django.views.generic import ListView, DetailView
 from database_view.forms.client_form import ClientForm
-from database_view.forms import DepartmentForm, DiscountCardForm, PositionForm, ProductForm
+from database_view.forms import DepartmentForm, DiscountCardForm, PositionForm, ProductForm, ProviderForm
 from database_view.models import ClientModel, DepartmentModel, DiscountCardModel, PositionModel, ProductModel, \
     ProviderModel, SaleModel, WorkerModel, WriteOffProductModel, WriteOffReasonModel
 
@@ -171,3 +171,35 @@ def product_update(request, pk):
     form = ProductForm(request.POST, instance=product)
     form.save()
     return redirect(reverse('product_list'))
+
+
+class ProviderListView(ListView):
+    model = ProviderModel
+    template_name = 'provider/provider_list.html'
+    extra_context = {'create_form': ProviderForm()}
+    queryset = ProviderModel.objects.all().order_by('-provider_id')
+
+
+def provider_create(request):
+    form = ProviderForm(request.POST)
+    if form.is_valid():
+        form.save()
+    return redirect(reverse('provider_list'))
+
+
+def provider_delete(request, pk):
+    ProviderModel.objects.get(pk=pk).delete()
+    return redirect(reverse('provider_list'))
+
+
+class ProviderDetailView(DetailView):
+    model = ProviderModel
+    template_name = 'provider/provider_detail.html'
+    extra_context = {'update_form': ProviderForm()}
+
+
+def provider_update(request, pk):
+    provider = get_object_or_404(ProviderModel, pk=pk)
+    form = ProviderForm(request.POST, instance=provider)
+    form.save()
+    return redirect(reverse('provider_list'))

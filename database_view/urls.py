@@ -3,12 +3,8 @@ from .views import ClientListView, DepartmentListView, DiscountCardListView, Cli
     clients_delete, clients_create, index, clients_update, DepartmentDetailView, department_delete, department_create, \
     department_update, DiscountCardDetailView, discount_card_create, discount_card_update, discount_card_delete, \
     PositionListView, position_delete, PositionDetailView, position_update, ProductListView, product_create, \
-    product_delete, ProductDetailView, product_update
-
-
-def discount_cards_update(args):
-    pass
-
+    product_delete, ProductDetailView, product_update, ProviderListView, provider_create, provider_delete, \
+    ProviderDetailView, provider_update
 
 urlpatterns = [
     path('', index, name='index'),
@@ -43,5 +39,9 @@ urlpatterns = [
     path('products/<slug:pk>/', ProductDetailView.as_view(), name='product_detail'),
     path('products/<slug:pk>/update/', product_update, name='product_update'),
 
-    path('products/', ProductListView.as_view(), name='product_list'),
+    path('providers/', ProviderListView.as_view(), name='provider_list'),
+    path('providers/create', provider_create, name='provider_create'),
+    path('providers/<slug:pk>/delete/', provider_delete, name='provider_delete'),
+    path('providers/<slug:pk>/', ProviderDetailView.as_view(), name='provider_detail'),
+    path('providers/<slug:pk>/update/', provider_update, name='provider_update'),
 ]
