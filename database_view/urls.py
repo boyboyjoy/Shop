@@ -6,7 +6,9 @@ from .views import ClientListView, DepartmentListView, DiscountCardListView, Cli
     product_delete, ProductDetailView, product_update, ProviderListView, provider_create, provider_delete, \
     ProviderDetailView, provider_update, SaleListView, sale_create, WorkerListView, worker_create, worker_delete, \
     WorkerDetailView, worker_update, WriteOffReasonListView, write_off_reason_create, write_off_reason_delete, \
-    write_off_reason_update, WriteOffReasonDetailView
+    write_off_reason_update, WriteOffReasonDetailView, WriteOffProductListView, write_off_product_create, \
+    write_off_product_delete, WriteOffProductDetailView, write_off_product_update, sale_delete, SaleDetailView, \
+    sale_update
 
 urlpatterns = [
     path('', index, name='index'),
@@ -51,9 +53,9 @@ urlpatterns = [
     # TODO TODO TODO TODO TODO
     path('sales/', SaleListView.as_view(), name='sale_list'),
     path('sales/create', sale_create, name='sale_create'),
-    path('providers/<slug:pk>/delete/', provider_delete, name='provider_delete'),
-    path('providers/<slug:pk>/', ProviderDetailView.as_view(), name='provider_detail'),
-    path('providers/<slug:pk>/update/', provider_update, name='provider_update'),
+    path('sales/<slug:pk>/delete/', sale_delete, name='sale_delete'),
+    path('sales/<slug:pk>/', SaleDetailView.as_view(), name='sale_detail'),
+    path('sales/<slug:pk>/update/', sale_update, name='sale_update'),
 
     path('workers/', WorkerListView.as_view(), name='worker_list'),
     path('workers/create', worker_create, name='worker_create'),
@@ -66,4 +68,10 @@ urlpatterns = [
     path('write_off_reasons/<slug:pk>/delete/', write_off_reason_delete, name='write_off_reason_delete'),
     path('write_off_reasons/<slug:pk>/', WriteOffReasonDetailView.as_view(), name='write_off_reason_detail'),
     path('write_off_reasons/<slug:pk>/update/', write_off_reason_update, name='write_off_reason_update'),
+    # TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
+    path('write_off_products/', WriteOffProductListView.as_view(), name='write_off_product_list'),
+    path('write_off_products/create', write_off_product_create, name='write_off_product_create'),
+    path('write_off_products/<slug:pk>/delete/', write_off_product_delete, name='write_off_product_delete'),
+    path('write_off_products/<slug:pk>/', WriteOffProductDetailView.as_view(), name='write_off_product_detail'),
+    path('write_off_products/<slug:pk>/update/', write_off_product_update, name='write_off_product_update'),
 ]

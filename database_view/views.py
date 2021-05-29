@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.views.generic import ListView, DetailView
 from database_view.forms.client_form import ClientForm
 from database_view.forms import DepartmentForm, DiscountCardForm, PositionForm, ProductForm, ProviderForm, SaleForm, \
-    WorkerForm, WriteOffReasonForm
+    WorkerForm, WriteOffReasonForm, WriteOffProductForm
 from database_view.models import ClientModel, DepartmentModel, DiscountCardModel, PositionModel, ProductModel, \
     ProviderModel, SaleModel, WorkerModel, WriteOffProductModel, WriteOffReasonModel
 
@@ -220,6 +220,24 @@ def sale_create(request):
     return redirect(reverse('sale_list'))
 
 
+def sale_delete(request, pk):
+    SaleModel.objects.get(pk=pk).delete()
+    return redirect(reverse('sale_list'))
+
+
+class SaleDetailView(DetailView):
+    model = SaleModel
+    template_name = 'sale/sale_detail.html'
+    extra_context = {'update_form': SaleForm()}
+
+
+def sale_update(request, pk):
+    sale = get_object_or_404(SaleModel, pk=pk)
+    form = SaleForm(request.POST, instance=sale)
+    form.save()
+    return redirect(reverse('sale_list'))
+
+
 class WorkerListView(ListView):
     model = WorkerModel
     template_name = 'worker/worker_list.html'
@@ -282,3 +300,35 @@ def write_off_reason_update(request, pk):
     form = WriteOffReasonForm(request.POST, instance=reason)
     form.save()
     return redirect(reverse('write_off_reason_list'))
+
+
+class WriteOffProductListView(ListView):
+    model = WriteOffProductModel
+    template_name = 'write_off_product/write_off_product_list.html'
+    extra_context = {'create_form': WriteOffProductForm}
+    queryset = WriteOffProductModel.objects.all().order_by('-write_off_product_id')
+
+
+def write_off_product_create(request):
+    form = WriteOffProductForm(request.POST)
+    if form.is_valid():
+        form.save()
+    return redirect(reverse('write_off_product_list'))
+
+
+def write_off_product_delete(request, pk):
+    WriteOffProductModel.objects.get(pk=pk).delete()
+    return redirect(reverse('write_off_product_list'))
+
+
+class WriteOffProductDetailView(DetailView):
+    model = WriteOffProductModel
+    template_name = 'write_off_product/write_off_product_detail.html'
+    extra_context = {'update_form': WriteOffProductForm()}
+
+
+def write_off_product_update(request, pk):
+    product = get_object_or_404(WriteOffProductModel, pk=pk)
+    form = WriteOffProductForm(request.POST, instance=product)
+    form.save()
+    return redirect(reverse('write_off_product_list'))

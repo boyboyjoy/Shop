@@ -23,11 +23,11 @@ tr:nth-child(even) {
   background-color: #dddddd;
 }
 </style>
-    <h1 align="center">Sale list</h1>
+    <h1 align="center">WriteOffProduct list</h1>
     <a href="{% url 'index' %}"> <----Back </a>
 </head>
 <body>
-<form action="{% url 'sale_create' %}" method="POST">
+<form action="{% url 'write_off_product_create' %}" method="POST">
     {% csrf_token %}
     <p>{{ create_form.as_p }}</p>
     <input type="submit" value="Create">
@@ -36,20 +36,21 @@ tr:nth-child(even) {
         <table>
             <tr>
                 <th>Worker</th>
-                <th>Client</th>
                 <th>Product</th>
-                <th>Cost</th>
+                <th>Reason</th>
+                <th>Count</th>
                 <th>Date</th>
             </tr>
             {% for item in object_list %}
             <tr>
+                <td> {{item.write_off_product_id }}</td>
                 <td>{{ item.worker_id }}</td>
-                <td>{{ item.client_id }}</td>
-                <td>{{ item.product_id}}</td>
-                <td>{{ item.sale_cost }}</td>
-                <td>{{ item.sale_data }}</td>
-                <td><a href="{% url 'sale_detail' item.sale_id %}">Update</a></td>
-                <td><a href="{% url 'sale_delete' item.sale_id %}">Delete</a></td>
+                <td>{{ item.product_id }}</td>
+                <td>{{ item.reason_id }}</td>
+                <td>{{ item.count }}</td>
+                <td>{{ item.date.date }}</td>
+
+                <td><a href="{% url 'write_off_product_update' item.write_off_product_id %}">Update</a></td>
             </tr>
             {% endfor %}
         </table>
