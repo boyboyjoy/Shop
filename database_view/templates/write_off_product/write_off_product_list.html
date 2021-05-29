@@ -43,14 +43,13 @@ tr:nth-child(even) {
             </tr>
             {% for item in object_list %}
             <tr>
-                <td> {{item.write_off_product_id }}</td>
                 <td>{{ item.worker_id }}</td>
                 <td>{{ item.product_id }}</td>
                 <td>{{ item.reason_id }}</td>
                 <td>{{ item.count }}</td>
                 <td>{{ item.date.date }}</td>
-
-                <td><a href="{% url 'write_off_product_update' item.write_off_product_id %}">Update</a></td>
+                <td><a href="{% url 'write_off_product_detail' item.write_off_product_id %}">Update</a></td>
+                <td><a href="{% url 'write_off_product_delete' item.write_off_product_id %}">Delete</a></td>
             </tr>
             {% endfor %}
         </table>
