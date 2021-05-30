@@ -15,8 +15,8 @@ urlpatterns = [
     path('', index, name='index'),
 
 
-    path('worker_reports/', get_workers_list, name='reports'),
-    path('worker_reports/<slug:pk>', get_worker_report, name='get_report'),
+    path('workers/reports', get_workers_list, name='reports'),
+    path('workers/reports/<slug:pk>', get_worker_report, name='get_report'),
 
     path('finder/', menu_for_find, name='finder'),
 
