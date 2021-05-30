@@ -453,3 +453,6 @@ def get_worker_report(request, pk):
     data = {'create_money': money_value, 'create_sales': sales.count(),
             'create_write_off': write_off_products.count(), 'worker': worker}
     return render(request, 'worker_report/worker_report.html', context=data)
+
+def menu_for_find(request):
+    return render(request, 'finder/finder_list.html', None)
