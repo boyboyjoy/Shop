@@ -1,11 +1,10 @@
 from django.contrib import messages
-from django.http import FileResponse
 from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
 from django.views.generic import ListView, DetailView
-from database_view.forms.client_form import ClientForm
 from database_view.forms import DepartmentForm, DiscountCardForm, PositionForm, ProductForm, ProviderForm, SaleForm, \
     WorkerForm, WriteOffReasonForm, WriteOffProductForm, SupplyForm
+from database_view.forms.client_form import ClientForm
 from database_view.forms.find_form import FindForm, FindDateForm
 from database_view.models import ClientModel, DepartmentModel, DiscountCardModel, PositionModel, ProductModel, \
     ProviderModel, SaleModel, WorkerModel, WriteOffProductModel, WriteOffReasonModel, SupplyModel
@@ -506,3 +505,16 @@ def providers_finder(request):
         if form.is_valid():
             providers = ProviderModel.objects.filter(name=form.cleaned_data.get('name'))
             return render(request, 'finder/provider_result.html', {'list': providers})
+
+
+def products_finder(request):
+    if request.method == 'GET':
+        form = FindForm()
+        form.fields['name'].label = 'Наименование'
+        return render(request, 'finder/product_finder.html', {'form': form})
+
+    if request.method == 'POST':
+        form = FindForm(request.POST)
+        if form.is_valid():
+            products = ProductModel.objects.filter(title=form.cleaned_data.get('name'))
+            return render(request, 'finder/product_result.html', {'list': products})
