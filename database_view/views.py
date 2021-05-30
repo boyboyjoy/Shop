@@ -6,7 +6,7 @@ from django.views.generic import ListView, DetailView
 from database_view.forms.client_form import ClientForm
 from database_view.forms import DepartmentForm, DiscountCardForm, PositionForm, ProductForm, ProviderForm, SaleForm, \
     WorkerForm, WriteOffReasonForm, WriteOffProductForm, SupplyForm
-from database_view.forms.find_form import FindForm
+from database_view.forms.find_form import FindForm, FindDateForm
 from database_view.models import ClientModel, DepartmentModel, DiscountCardModel, PositionModel, ProductModel, \
     ProviderModel, SaleModel, WorkerModel, WriteOffProductModel, WriteOffReasonModel, SupplyModel
 
@@ -480,3 +480,16 @@ def workers_finder(request):
         if form.is_valid():
             workers = WorkerModel.objects.filter(surname=form.cleaned_data.get('name'))
             return render(request, 'finder/worker_result.html', {'list': workers})
+
+
+def sales_finder(request):
+    if request.method == 'GET':
+        form = FindDateForm()
+        form.fields['date'].label = 'Дата продажи'
+        return render(request, 'finder/sale_finder.html', {'form': form})
+
+    if request.method == 'POST':
+        form = FindDateForm(request.POST)
+        if form.is_valid():
+            sales = SaleModel.objects.filter(sale_date__date=form.cleaned_data.get('date'))
+            return render(request, 'finder/sale_result.html', {'list': sales})

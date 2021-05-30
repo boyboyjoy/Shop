@@ -27,6 +27,7 @@ tr:nth-child(even) {
     <a href="{% url 'index' %}"> <----Назад </a>
 </head>
 <body>
+<p align="right"><a href="{% url 'sale_find' %}">Искать продажи</a></p>
 <table>
     <form action="{% url 'sale_create' %}" method="POST">
     {% csrf_token %}
