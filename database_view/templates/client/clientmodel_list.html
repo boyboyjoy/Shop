@@ -28,6 +28,7 @@ tr:nth-child(even) {
 </head>
 <body>
 <br><br>
+<p align="right"><a href="{% url 'client_find' %}">Искать клиентов</a></p>
 <table>
     <form action="{% url 'client_create' %}" method="POST">
     {% csrf_token %}
@@ -45,12 +46,14 @@ tr:nth-child(even) {
             <tr>
                 <th>Фамилия</th>
                 <th>Имя</th>
+                <th>Отчество</th>
                 <th>Телефон</th>
             </tr>
             {% for item in object_list %}
             <tr>
                 <td>{{ item.surname }}</td>
                 <td>{{ item.name }}</td>
+                <td>{{ item.second_name }}</td>
                 <td>{{ item.phone }}</td>
                 <td><a href="{% url 'client_detail' item.client_id %}">Обновить</a></td>
                 <td><a href="{% url 'client_detail_delete' item.client_id %}">Удалить</a></td>

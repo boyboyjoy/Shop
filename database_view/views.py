@@ -6,6 +6,7 @@ from django.views.generic import ListView, DetailView
 from database_view.forms.client_form import ClientForm
 from database_view.forms import DepartmentForm, DiscountCardForm, PositionForm, ProductForm, ProviderForm, SaleForm, \
     WorkerForm, WriteOffReasonForm, WriteOffProductForm, SupplyForm
+from database_view.forms.find_form import FindForm
 from database_view.models import ClientModel, DepartmentModel, DiscountCardModel, PositionModel, ProductModel, \
     ProviderModel, SaleModel, WorkerModel, WriteOffProductModel, WriteOffReasonModel, SupplyModel
 
@@ -454,5 +455,28 @@ def get_worker_report(request, pk):
             'create_write_off': write_off_products.count(), 'worker': worker}
     return render(request, 'worker_report/worker_report.html', context=data)
 
-def menu_for_find(request):
-    return render(request, 'finder/finder_list.html', None)
+
+def clients_finder(request):
+    if request.method == 'GET':
+        form = FindForm()
+        form.fields['name'].label = 'Фамилия'
+        return render(request, 'finder/client_finder.html', {'form': form})
+
+    if request.method == 'POST':
+        form = FindForm(request.POST)
+        if form.is_valid():
+            clients = ClientModel.objects.filter(surname=form.cleaned_data.get('name'))
+            return render(request, 'finder/client_result.html', {'list': clients})
+
+
+def workers_finder(request):
+    if request.method == 'GET':
+        form = FindForm()
+        form.fields['name'].label = 'Фамилия'
+        return render(request, 'finder/worker_finder.html', {'form': form})
+
+    if request.method == 'POST':
+        form = FindForm(request.POST)
+        if form.is_valid():
+            workers = WorkerModel.objects.filter(surname=form.cleaned_data.get('name'))
+            return render(request, 'finder/worker_result.html', {'list': workers})
