@@ -10,7 +10,7 @@ from .views import ClientListView, DepartmentListView, DiscountCardListView, Cli
     write_off_product_delete, WriteOffProductDetailView, write_off_product_update, sale_delete, SaleDetailView, \
     sale_update, SupplyListView, supply_create, supply_delete, supply_update, SupplyDetailView, position_create, \
     get_workers_list, get_worker_report, clients_finder, workers_finder, sales_finder, providers_finder, \
-    products_finder, supplies_finder
+    products_finder, supplies_finder, write_off_products_finder
 
 urlpatterns = [
     path('', index, name='index'),
@@ -25,6 +25,7 @@ urlpatterns = [
     path('providers/find/', providers_finder, name='provider_find'),
     path('products/find/', products_finder, name='product_find'),
     path('supplies/find/', supplies_finder, name='supply_find'),
+    path('write_off_products/find/', write_off_products_finder, name='write_off_product_find'),
 
     path('clients/', ClientListView.as_view(), name='client_list'),
     path('clients/<slug:pk>/', ClientDetailView.as_view(), name='client_detail'),

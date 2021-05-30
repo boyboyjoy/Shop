@@ -27,6 +27,7 @@ tr:nth-child(even) {
     <a href="{% url 'index' %}"> <----Назад </a>
 </head>
 <body>
+<p align="right"><a href="{% url 'write_off_product_find' %}">Искать списанные товары</a></p>
 <table>
     <form action="{% url 'write_off_product_create' %}" method="POST">
     {% csrf_token %}

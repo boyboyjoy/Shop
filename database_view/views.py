@@ -531,3 +531,16 @@ def supplies_finder(request):
         if form.is_valid():
             supplies = SupplyModel.objects.filter(supply_date__date=form.cleaned_data.get('date'))
             return render(request, 'finder/supply_result.html', {'list': supplies})
+
+
+def write_off_products_finder(request):
+    if request.method == 'GET':
+        form = FindDateForm()
+        form.fields['date'].label = 'Дата списания'
+        return render(request, 'finder/write_off_product_finder.html', {'form': form})
+
+    if request.method == 'POST':
+        form = FindDateForm(request.POST)
+        if form.is_valid():
+            products = WriteOffProductModel.objects.filter(date__date=form.cleaned_data.get('date'))
+            return render(request, 'finder/write_off_product_result.html', {'list': products})
