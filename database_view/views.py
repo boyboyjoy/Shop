@@ -518,3 +518,16 @@ def products_finder(request):
         if form.is_valid():
             products = ProductModel.objects.filter(title=form.cleaned_data.get('name'))
             return render(request, 'finder/product_result.html', {'list': products})
+
+
+def supplies_finder(request):
+    if request.method == 'GET':
+        form = FindDateForm()
+        form.fields['date'].label = 'Дата поставки'
+        return render(request, 'finder/supply_finder.html', {'form': form})
+
+    if request.method == 'POST':
+        form = FindDateForm(request.POST)
+        if form.is_valid():
+            supplies = SupplyModel.objects.filter(supply_date__date=form.cleaned_data.get('date'))
+            return render(request, 'finder/supply_result.html', {'list': supplies})
