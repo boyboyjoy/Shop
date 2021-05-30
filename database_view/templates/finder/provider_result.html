@@ -27,10 +27,12 @@ tr:nth-child(even) {
 <table>
     <tr>
         <th> Фирма</th>
+        <th> Контракт истекает</th>
     </tr>
     {% for item in list %}
     <tr>
         <td> {{ item.name }}</td>
+        <td> {{ item.contract_expire.date }}</td>
     </tr>
     {% endfor %}
 </table>

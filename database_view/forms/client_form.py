@@ -5,7 +5,7 @@ from database_view.models.client_model import ClientModel
 class ClientForm(ModelForm):
     class Meta:
         model = ClientModel
-        fields = ('name', 'surname', 'second_name', 'phone')
+        fields = ('surname', 'name', 'second_name', 'phone')
         labels = {'name': 'имя', 'surname': 'фамилия', 'second_name': 'отчество', 'phone': 'телефон'}
 
     def clean_name(self):
