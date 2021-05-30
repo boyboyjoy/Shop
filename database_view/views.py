@@ -493,3 +493,16 @@ def sales_finder(request):
         if form.is_valid():
             sales = SaleModel.objects.filter(sale_date__date=form.cleaned_data.get('date'))
             return render(request, 'finder/sale_result.html', {'list': sales})
+
+
+def providers_finder(request):
+    if request.method == 'GET':
+        form = FindForm()
+        form.fields['name'].label = 'Фирма'
+        return render(request, 'finder/provider_finder.html', {'form': form})
+
+    if request.method == 'POST':
+        form = FindForm(request.POST)
+        if form.is_valid():
+            providers = ProviderModel.objects.filter(name=form.cleaned_data.get('name'))
+            return render(request, 'finder/provider_result.html', {'list': providers})
