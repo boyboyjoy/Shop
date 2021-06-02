@@ -51,7 +51,7 @@ tr:nth-child(even) {
             {% for item in object_list %}
             <tr>
                 <td>{{ item.title }}</td>
-                <td>{{ item.price }}</td>
+                <td>{{ item.price }} руб.</td>
                 <td>{{ item.vendor_code }}</td>
                 <td>{{ item.count }}</td>
                 <td><a href="{% url 'product_detail' item.product_id %}">Обновить</a></td>

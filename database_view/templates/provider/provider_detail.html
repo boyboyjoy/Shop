@@ -21,6 +21,7 @@ tr:nth-child(even) {
 </style>
 </head>
 <body>
+{% load i18n %}
 <table>
     <form action="{% url 'provider_update' object.provider_id %}" method="post">
     {% csrf_token %}
@@ -43,7 +44,9 @@ tr:nth-child(even) {
             <tr>
                 <td>{{ object.name }}</td>
                 <td>{{ object.phone }}</td>
+                {% language 'ru' %}
                 <td>{{ object.contract_expire.date }}</td>
+                {% endlanguage %}
             </tr>
         </table>
     </form>

@@ -21,6 +21,7 @@ tr:nth-child(even) {
 </style>
 </head>
 <body>
+{% load i18n %}
 <table>
     <form action="{% url 'supply_update' object.supply_id %}" method="post">
     {% csrf_token %}
@@ -45,7 +46,9 @@ tr:nth-child(even) {
                 <td>{{ object.product_id }}</td>
                 <td>{{ object.provider_id }}</td>
                 <td>{{ object.count}}</td>
+                {% language 'ru' %}
                 <td>{{ object.supply_date.date }}</td>
+                {% endlanguage %}
             </tr>
         </table>
     </form>

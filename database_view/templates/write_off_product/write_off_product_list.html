@@ -27,6 +27,7 @@ tr:nth-child(even) {
     <a href="{% url 'index' %}"> <----Назад </a>
 </head>
 <body>
+{% load i18n %}
 <p align="right"><a href="{% url 'write_off_product_find' %}">Искать списанные товары</a></p>
 <table>
     <form action="{% url 'write_off_product_create' %}" method="POST">
@@ -55,7 +56,9 @@ tr:nth-child(even) {
                 <td>{{ item.product_id }}</td>
                 <td>{{ item.reason_id }}</td>
                 <td>{{ item.count }}</td>
+                {% language 'ru' %}
                 <td>{{ item.date.date }}</td>
+                {% endlanguage %}
                 <td><a href="{% url 'write_off_product_detail' item.write_off_product_id %}">Обновить</a></td>
                 <td><a href="{% url 'write_off_product_delete' item.write_off_product_id %}">Удалить</a></td>
             </tr>

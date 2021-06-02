@@ -23,6 +23,7 @@ tr:nth-child(even) {
     <title>Результат поиска клиентов</title>
 </head>
 <body>
+{% load i18n %}
 <h1 align="center"> Результат поиска поставок </h1>
 <table>
     <tr>
@@ -32,7 +33,9 @@ tr:nth-child(even) {
     {% for item in list %}
     <tr>
         <td> {{ item.provider_id }}</td>
+        {% language 'ru' %}
         <td> {{ item.supply_date.date }}</td>
+        {% endlanguage %}
     </tr>
     {% endfor %}
 </table>

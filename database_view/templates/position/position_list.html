@@ -48,7 +48,7 @@ tr:nth-child(even) {
             {% for item in object_list %}
             <tr>
                 <td>{{ item.name }}</td>
-                <td>{{ item.salary }}</td>
+                <td>{{ item.salary }} руб.</td>
                 <td><a href="{% url 'position_detail' item.position_id %}">Обновить</a></td>
                 <td><a href="{% url 'position_delete' item.position_id %}">Удалить</a></td>
             </tr>
